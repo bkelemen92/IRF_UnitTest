@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using System;
+using UnitTestExample.Controllers;
 
 namespace UnitTestExample.Test
 {
@@ -18,7 +19,9 @@ namespace UnitTestExample.Test
         [Test]
         public void TestValidateEmail(string email, bool expectedResult)
         {
-            
+            var accountController = new AccountController();
+            var actualResult = accountController.ValidateEmail(email);
+            NUnit.Framework.Assert.AreEqual(expectedResult, actualResult);
         }
     }
 }
