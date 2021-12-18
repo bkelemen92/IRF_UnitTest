@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using System;
+using System.Activities;
 using UnitTestExample.Controllers;
 
 namespace UnitTestExample.Test
@@ -50,6 +51,30 @@ namespace UnitTestExample.Test
             NUnit.Framework.Assert.AreEqual(email, actualResult.Email);
             NUnit.Framework.Assert.AreEqual(password, actualResult.Password);
             NUnit.Framework.Assert.AreEqual(Guid.Empty, actualResult.ID);
+
+        }
+
+        [
+            Test,
+            TestCase("a.a.hu", "ASDasd123"),
+            TestCase("zz.hu", "ASD123asd"),
+            TestCase("zz.hu", "a"),
+            TestCase("z@z.hu", "b"),
+            TestCase("huhu.com", "123"),
+            TestCase("zz.hu", "AAAAAAAAA")
+        ]
+        public void TestRegisterValidateException(string email, string password)
+        {
+            var accountController = new AccountController();
+            try
+            {
+                var actualResult = accountController.Register(email, password);
+                NUnit.Framework.Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                NUnit.Framework.Assert.IsInstanceOf<ValidationException>(ex);
+            }
 
         }
     }
