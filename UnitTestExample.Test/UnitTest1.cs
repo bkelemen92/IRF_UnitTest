@@ -56,12 +56,19 @@ namespace UnitTestExample.Test
 
         [
             Test,
-            TestCase("a.a.hu", "ASDasd123"),
-            TestCase("zz.hu", "ASD123asd"),
-            TestCase("zz.hu", "a"),
-            TestCase("z@z.hu", "b"),
-            TestCase("huhu.com", "123"),
-            TestCase("zz.hu", "AAAAAAAAA")
+            //TestCase("a.a.hu", "ASDasd123"),
+            //TestCase("zz.hu", "ASD123asd"),
+            //TestCase("zz.hu", "a"),
+            //TestCase("z@z.hu", "b"),
+            //TestCase("huhu.com", "123"),
+            //TestCase("zz.hu", "AAAAAAAAA"),
+            //TestCase("asd@asd.hu", "ASDasd123")
+            TestCase("irf@uni-corvinus", "Abcd1234"),
+            TestCase("irf.uni-corvinus.hu", "Abcd1234"),
+            TestCase("irf@uni-corvinus.hu", "abcd1234"),
+            TestCase("irf@uni-corvinus.hu", "ABCD1234"),
+            TestCase("irf@uni-corvinus.hu", "abcdABCD"),
+            TestCase("irf@uni-corvinus.hu", "Ab1234"),
         ]
         public void TestRegisterValidateException(string email, string password)
         {
@@ -74,6 +81,7 @@ namespace UnitTestExample.Test
             catch (Exception ex)
             {
                 NUnit.Framework.Assert.IsInstanceOf<ValidationException>(ex);
+                throw;
             }
 
         }
